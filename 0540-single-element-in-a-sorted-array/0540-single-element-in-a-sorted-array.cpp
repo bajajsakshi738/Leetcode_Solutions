@@ -1,20 +1,30 @@
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        unordered_map<int,int>umap;
-        if(nums.size()==1) {
+        int n=nums.size();
+        if(n==1) {
             return nums[0];
         }
         
-        for(auto&it:nums) {
-            umap[it]++;
-        }
-        
-        for(auto&it:umap) {
-            if(it.second==1) {
-                return it.first;
+        for(int i=0;i<n;i++) {
+            if(i==0) {
+                if(nums[i]!=nums[i+1]) {
+                    return nums[i];
+                }
+            }
+            
+            else if(i==n-1) {
+                if(nums[i]!=nums[i-1]) {
+                    return nums[i];
+                }
+            }
+            
+            else {
+                if(nums[i]!=nums[i+1] && nums[i]!=nums[i-1]) {
+                    return nums[i];
+                }
             }
         }
-        return 0;
+        return -1;
     }
 };
